@@ -42,10 +42,10 @@ func ExampleDeposit() {
 		err := deposit.Deposit(&card, 50)
 		fmt.Println(card, err)
 	}
-	//Output: {true 200} <nil>
-	//{false 100} error: card is not active
-	//{true 100} error: the amount can't be less than 0
-	//{true 100} error: the money on balance can't be more than 50 000 000
-	//{true -100} error: the balance after transfer is negative
+	//Output: {0   200 true} <nil>
+	//{0   100 false} error: card is not active
+	//{0   100 true} error: the amount can't be less than 0
+	//{0   100 true} error: the money on balance can't be more than 50 000 000
+	//{0   -100 true} error: the balance after transfer is negative
 
 }

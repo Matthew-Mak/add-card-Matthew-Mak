@@ -51,10 +51,10 @@ func ExampleWithdraw() {
 		fmt.Println(card, err)
 	}
 
-	//Output: {true 100} <nil>
-	//{false 200} error: card is not active
-	//{true 100} error: the amount can't be less than 0
-	//{true 100} error: the amount can't higher than 100 000 000
-	//{true 50} error: not enough money on the balance
-	//{true 0} <nil>
+	//Output: {0   100 true} <nil>
+	//{0   200 false} error: card is not active
+	//{0   100 true} error: the amount can't be less than 0
+	//{0   100 true} error: the amount can't higher than 100 000 000
+	//{0   50 true} error: not enough money on the balance
+	//{0   0 true} <nil>
 }
