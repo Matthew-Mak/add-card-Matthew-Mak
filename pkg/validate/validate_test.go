@@ -2,7 +2,8 @@ package validate_test
 
 import (
 	"fmt"
-	"main/pkg/validate"
+
+	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/validate"
 )
 
 func ExampleValidate() {

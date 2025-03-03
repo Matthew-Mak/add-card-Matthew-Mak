@@ -1,3 +1,5 @@
-module github.com/alif-academy-uz/alifmobi-add-card-Matthew-Mak
+module github.com/Matthew-Mak/add-card-Matthew-Mak
 
 go 1.24.0
+
+require github.com/Matthew-Mak/card-Matthew-Mak v1.0.0 // indirect

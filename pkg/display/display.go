@@ -2,7 +2,8 @@ package display
 
 import (
 	"fmt"
-	"main/pkg/validate"
+
+	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/validate"
 )
 
 func DisplaySliceOfCards(cards []validate.Card) {

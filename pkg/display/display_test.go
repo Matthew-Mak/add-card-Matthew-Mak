@@ -1,8 +1,8 @@
 package display_test
 
 import (
-	"main/pkg/display"
-	"main/pkg/validate"
+	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/display"
+	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/validate"
 )
 
 func ExampleDisplaySliceOfCards() {
