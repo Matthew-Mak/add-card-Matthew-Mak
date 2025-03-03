@@ -15,6 +15,8 @@ func main() {
 	choice := ""
 
 	for !done {
+
+		// Добавить карту
 		if len(cards) == 5 {
 			done = true
 			fmt.Println("Card limit is reached, exiting program...")
@@ -40,5 +42,21 @@ func main() {
 		}
 	}
 
+	// Показать карты
 	display.DisplaySliceOfCards(cards)
+
+	//// Снять деньги (Withdraw)
+	// card := types.Card{IsActive: true, Balance: 100}
+	// input := 0
+	// fmt.Println("Initial balance: ", card.Balance)
+	// fmt.Print("Input amount: ")
+	// fmt.Scan(&input)
+	// err := withdraw.Withdraw(&card, types.Amount(input))
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Println("Resulted balance: ", card.Balance)
+
+	// Пополнить баланс (Deposit)
+
 }
