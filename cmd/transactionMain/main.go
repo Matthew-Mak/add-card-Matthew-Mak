@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/display"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/find"
+	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/transaction"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/validate"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/withdraw"
 	cards "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/card"
+	"time"
 )
 import transactions "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/transaction"
 
 func main() {
-	transactions := make(map[int][]transactions.Transaction)
+	transactionsMap := make(map[int][]transactions.Transaction)
+	var transactionElement transactions.Transaction
 	cardSlice := make([]cards.Card, 0, 5)
 	var card cards.Card
 	var date validate.CardDate
@@ -25,6 +28,7 @@ func main() {
 		fmt.Println("2: Show cards.")
 		fmt.Println("3: Withdraw card.")
 		fmt.Println("4: Deposit card.")
+		fmt.Println("5: Show Transaction History.")
 		fmt.Println("5: Exit.")
 		fmt.Scanln(&choice)
 
@@ -80,6 +84,8 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
+			transactionElement = transactions.Transaction{Id: cardFound.Id, CardId: cardFound.AccountID, OperationType: "Withdraw", Amount: cards.Amount(inputAmount), Timestamp: time.Now()}
+			transactionsMap = transaction.SaveTransaction(cardFound.Id, transactionElement, transactionsMap)
 			fmt.Println("Resulted balance: ", &cardFound.Balance)
 		case "4":
 			// Пополнить баланс (Deposit)
@@ -99,8 +105,17 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
+			transactionElement = transactions.Transaction{Id: cardFound.Id, CardId: cardFound.AccountID, OperationType: "Deposit", Amount: cards.Amount(inputAmount), Timestamp: time.Now()}
+			transactionsMap = transaction.SaveTransaction(cardFound.Id, transactionElement, transactionsMap)
 			fmt.Println("Resulted balance: ", &cardFound.Balance)
 		case "5":
+			fmt.Print("Input card Id: ")
+			fmt.Scan(&id)
+			transactinsForOutput := transaction.GetTransactionHistory(id, transactionsMap)
+			for _, transact := range transactinsForOutput {
+				fmt.Println(transactinsForOutput[transact.Id])
+			}
+		case "6":
 			fmt.Println("Exiting program...")
 			done = true
 		}
