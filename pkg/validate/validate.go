@@ -2,6 +2,7 @@ package validate
 
 import (
 	"errors"
+	cards "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/card"
 	"strconv"
 	"strings"
 	"time"
@@ -18,14 +19,7 @@ var (
 
 type CardDate string
 
-type Card struct {
-	Id      int
-	Number  string
-	System  string
-	Balance int
-}
-
-func Validate(card Card, date CardDate) (Card, error) {
+func Validate(card cards.Card, date CardDate) (cards.Card, error) {
 	var (
 		currentMonth time.Month
 		currentYear  int
@@ -39,14 +33,14 @@ func Validate(card Card, date CardDate) (Card, error) {
 		humoSystemName     = "Humo"
 	)
 
-	if len(card.Number) > 16 {
+	if len(card.AccountID) > 16 {
 		return card, ErrNumberTooLong
 	}
-	if len(card.Number) < 16 {
+	if len(card.AccountID) < 16 {
 		return card, ErrNumberTooShort
 	}
-	for i := 0; i < len(card.Number); i++ {
-		if int(card.Number[i]) > 57 || int(card.Number[i]) < 48 {
+	for i := 0; i < len(card.AccountID); i++ {
+		if int(card.AccountID[i]) > 57 || int(card.AccountID[i]) < 48 {
 			return card, ErrNumberHasNoDigits
 		}
 	}
@@ -68,19 +62,19 @@ func Validate(card Card, date CardDate) (Card, error) {
 		return card, ErrCardMonthExpired
 	}
 
-	if card.Number[:4] == uzcardSystemNumber {
-		card.System = uzcardSystemName
-	} else if card.Number[:4] == humoSystemNumber {
-		card.System = humoSystemName
+	if card.AccountID[:4] == uzcardSystemNumber {
+		card.Pan = uzcardSystemName
+	} else if card.AccountID[:4] == humoSystemNumber {
+		card.Pan = humoSystemName
 	} else {
 		return card, ErrWrongCardSystem
 	}
 
 	card.Id = 1
 	//Replacing numbers with xes
-	card.Number = card.Number[:4] + "xxxxxxxx" + card.Number[12:]
+	card.AccountID = card.AccountID[:4] + "xxxxxxxx" + card.AccountID[12:]
 	//Inserting spaces
-	card.Number = card.Number[:4] + " " + card.Number[4:8] + " " + card.Number[8:12] + " " + card.Number[12:]
+	card.AccountID = card.AccountID[:4] + " " + card.AccountID[4:8] + " " + card.AccountID[8:12] + " " + card.AccountID[12:]
 
 	return card, nil
 }

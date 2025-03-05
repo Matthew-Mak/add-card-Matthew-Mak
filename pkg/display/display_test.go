@@ -1,18 +1,18 @@
 package display_test
 
 import (
-	"main/pkg/display"
-	"main/pkg/validate"
+	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/display"
+	cards "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/card"
 )
 
 func ExampleDisplaySliceOfCards() {
 	// no errors test
 	{
-		card1 := validate.Card{Id: 1, Number: "8600123412341234", System: "UzCard", Balance: 500}
-		card2 := validate.Card{Id: 2, Number: "8600123412341234", System: "UzCard", Balance: 500}
-		card3 := validate.Card{Id: 3, Number: "8600123412341234", System: "UzCard", Balance: 500}
+		card1 := cards.Card{Id: 1, AccountID: "8600123412341234", Pan: "UzCard", Balance: 500, IsActive: true}
+		card2 := cards.Card{Id: 2, AccountID: "8600123412341234", Pan: "UzCard", Balance: 500, IsActive: true}
+		card3 := cards.Card{Id: 3, AccountID: "8600123412341234", Pan: "UzCard", Balance: 500, IsActive: true}
 
-		cards := make([]validate.Card, 0, 5)
+		cards := make([]cards.Card, 0, 5)
 		cards = append(cards, card1)
 		cards = append(cards, card2)
 		cards = append(cards, card3)
