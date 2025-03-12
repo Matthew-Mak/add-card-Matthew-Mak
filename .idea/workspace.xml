@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6098dfc6-6d14-4bb7-a9ec-dedea1be9062" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/cmd/addCardImproved/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/addCardImproved/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/find/find_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/find/find_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +32,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "golangci",
     "go.import.settings.migrated": "true",
     "last_opened_file_path": "C:/Users/SystemX/GolandProjects/Git/add-card-Matthew-Mak/.github/workflows",
     "node.js.detected.package.eslint": "true",
