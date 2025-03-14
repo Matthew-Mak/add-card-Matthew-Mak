@@ -2,15 +2,17 @@ package main
 
 import (
 	"fmt"
+	"time"
+
+	cards "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/card"
+	transactions "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/transaction"
+
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/display"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/find"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/transaction"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/validate"
 	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/withdraw"
-	cards "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/card"
-	"time"
 )
-import transactions "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/transaction"
 
 func main() {
 	transactionsMap := make(map[int][]transactions.Transaction)
@@ -30,7 +32,10 @@ func main() {
 		fmt.Println("4: Deposit card.")
 		fmt.Println("5: Show Transaction History.")
 		fmt.Println("5: Exit.")
-		fmt.Scanln(&choice)
+		_, err := fmt.Scanln(&choice)
+		if err != nil {
+			panic(err)
+		}
 
 		switch choice {
 
@@ -45,19 +50,34 @@ func main() {
 					fmt.Println("Card limit is reached, exiting program...")
 				}
 				fmt.Print("Input CARD to add your card or EXIT to quit: ")
-				fmt.Scanln(&choiceAdd)
+				_, err = fmt.Scan(&choiceAdd)
+				if err != nil {
+					panic(err)
+				}
 				switch choiceAdd {
 				case "CARD":
 					fmt.Print("Input card number: ")
-					fmt.Scanln(&card.AccountID)
+					_, err = fmt.Scanln(&card.AccountID)
+					if err != nil {
+						panic(err)
+					}
+
 					fmt.Print("Input card date devided by (/): ")
-					fmt.Scanln(&date)
-					card, err := validate.Validate(card, date)
+					_, err = fmt.Scanln(&date)
+					if err != nil {
+						panic(err)
+					}
+
+					card, err = validate.Validate(card, date)
 					if err != nil {
 						panic(err)
 					}
 					fmt.Print("Input card balance: ")
-					fmt.Scanln(&card.Balance)
+					_, err = fmt.Scanln(&card.Balance)
+					if err != nil {
+						panic(err)
+					}
+
 					cardSlice = append(cardSlice, card)
 				case "EXIT":
 					doneAdd = true
@@ -72,9 +92,16 @@ func main() {
 			inputAmount := 0
 			fmt.Println("Initial balance: ", card.Balance)
 			fmt.Print("Input amount: ")
-			fmt.Scan(&inputAmount)
+			_, err := fmt.Scan(&inputAmount)
+			if err != nil {
+				panic(err)
+			}
+
 			fmt.Print("Input card Id: ")
-			fmt.Scan(&id)
+			_, err = fmt.Scan(&id)
+			if err != nil {
+				panic(err)
+			}
 
 			cardFound, err := find.FindByID(id, cardSlice)
 			if err != nil {
@@ -93,9 +120,16 @@ func main() {
 			inputAmount := 0
 			fmt.Println("Initial balance: ", card.Balance)
 			fmt.Print("Input amount: ")
-			fmt.Scan(&inputAmount)
+			_, err = fmt.Scan(&inputAmount)
+			if err != nil {
+				panic(err)
+			}
+
 			fmt.Print("Input card Id: ")
-			fmt.Scan(&id)
+			_, err = fmt.Scan(&id)
+			if err != nil {
+				panic(err)
+			}
 
 			cardFound, err := find.FindByID(id, cardSlice)
 			if err != nil {
@@ -110,7 +144,11 @@ func main() {
 			fmt.Println("Resulted balance: ", &cardFound.Balance)
 		case "5":
 			fmt.Print("Input card Id: ")
-			fmt.Scan(&id)
+			_, err = fmt.Scan(&id)
+			if err != nil {
+				panic(err)
+			}
+
 			transactinsForOutput := transaction.GetTransactionHistory(id, transactionsMap)
 			for _, transact := range transactinsForOutput {
 				fmt.Println(transactinsForOutput[transact.Id])

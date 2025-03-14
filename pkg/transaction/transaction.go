@@ -10,8 +10,8 @@ func SaveTransaction(CardId int, transaction transactions.Transaction, transacti
 }
 
 func GetTransactionHistory(id int, transactionsMap map[int][]transactions.Transaction) []transactions.Transaction {
-	if transactions, exists := transactionsMap[id]; exists {
-		return transactions
+	if allTransactions, exists := transactionsMap[id]; exists {
+		return allTransactions
 	}
 	return []transactions.Transaction{}
 }
