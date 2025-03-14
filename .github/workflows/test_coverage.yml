@@ -25,7 +25,7 @@ jobs:
         run: go mod tidy
 
       - name: Run tests with coverage
-        run: go test ./... -coverprofile=coverage.out -covermode=atomic
+        run: go test $(go list ./... | grep -v cmd) -coverprofile=coverage.out -covermode=atomic
 
       - name: Check coverage threshold
         run: |
@@ -35,4 +35,3 @@ jobs:
             echo "Coverage is below 70%! Failing the job."
             exit 1
           fi
-

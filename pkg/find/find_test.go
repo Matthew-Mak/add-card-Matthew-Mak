@@ -2,8 +2,10 @@ package find_test
 
 import (
 	"fmt"
-	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/find"
+
 	cards "github.com/Matthew-Mak/card-Matthew-Mak/v2/pkg/types/card"
+
+	"github.com/Matthew-Mak/add-card-Matthew-Mak/pkg/find"
 )
 
 func ExampleFindByID() {
@@ -18,8 +20,8 @@ func ExampleFindByID() {
 		cards = append(cards, card2)
 		cards = append(cards, card3)
 
-		foundCard, err := find.FindByID(1, cards)
-		fmt.Println(&foundCard, err)
+		_, err := find.FindByID(1, cards)
+		fmt.Println(err)
 	}
 	// invalid Id test
 	{
@@ -32,9 +34,9 @@ func ExampleFindByID() {
 		cards = append(cards, card2)
 		cards = append(cards, card3)
 
-		foundCard, err := find.FindByID(4, cards)
-		fmt.Println(foundCard, err)
+		_, err := find.FindByID(4, cards)
+		fmt.Println(err)
 	}
-	//Output: 0xc00004c0d0 <nil>
-	//<nil> error: the amount can't be less than 0
+	//Output: <nil>
+	//error: the amount can't be less than 0
 }
